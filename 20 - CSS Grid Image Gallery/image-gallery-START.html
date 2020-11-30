@@ -47,7 +47,7 @@
 
 	.close {
 		background: none;
-		color: white;
+		color: black;
 		border: 0;
 	}
 
@@ -136,9 +136,11 @@
 
 	.overlay.open {
 		display: grid;
+		align-items: center;
+		justify-items: center;
 	}
 
-	.overlay figure {
+	.overlay-inner {
 		background: white;
 		width: 700px;
 		padding: 20px;
@@ -175,6 +177,23 @@
 		.concat(Array.from({length: 25}, () => [1, 1]));
 	const html = digits.map(generateHTML).join('');
 	gallery.innerHTML = html;
+
+	function handleClick(event) {
+		const src = event.currentTarget.querySelector('img').src;
+		overlay.classList.add('open');
+		overlayImage.src = src;
+	}
+
+	function closeOverlay() {
+		overlay.classList.remove('open');
+	}
+
+	const items = document.querySelectorAll('.item');
+	items.forEach((item) => {
+		item.addEventListener('click', handleClick);
+	})
+
+	overlayClose.addEventListener('click', closeOverlay);
 
 </script>
 </body>
